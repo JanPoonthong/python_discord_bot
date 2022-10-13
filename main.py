@@ -34,10 +34,8 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 #TODO(Biw) do this krub
-def remove_prefix(text, prefix):
-    if text.startswith(prefix):
-        return text[len(prefix):]
-    return text  # or whatever
+def remove_prefix(text):
+    return text[:-5]
 
 
 @client.event
