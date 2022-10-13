@@ -33,7 +33,7 @@ client = discord.Client(intents=intents)
 async def on_ready():
     print(f'We have logged in as {client.user}')
 
-#TODO(Biw) do this krub
+
 def remove_prefix(text):
     return text[:-5]
 
@@ -44,6 +44,9 @@ async def on_message(message):
         return
 
     if message.content.startswith('$hello'):
-        await message.channel.send(f'Hello! @')
+        await message.channel.send(f'Hello! @{remove_prefix(str(message.author))}')
+
+    elif message.content.startswith('```python') and message.content.endswith("```"):
+        await message.channel.send(f'```hello world```')
 
 client.run(os.getenv('DISCORD_TOKEN'))
