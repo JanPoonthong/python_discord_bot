@@ -46,10 +46,25 @@ def remove_python_prefix(discord_code):
     return discord_code
 
 
+""""
 def write_python_on_file(code):
-    with open("discord_message.py", "w") as f:
-        # f.writelines(["try:\n", f"\t{code}", "except BaseException as ex:\n", "ex_type, ex_value, ex_traceback = sys.exc_info()\n", "trace_back = traceback.extract_tb(ex_traceback)\n", "stack_trace = list()\n", "for trace in trace_back:\n", "stack_trace.append('File : %s , Line : %d, Func.Name : %s, Message : %s' % (trace[0], trace[1], trace[2], trace[3]))\n, "print('Exception type : %s ' % ex_type.__name__)"
-        f.write(f"{code}")
+    with open("discord_message.py", "w") as first_file:
+        first_file.writelines(["import sys\n", "import traceback\n", "try:\n", f"\t{code}"])
+        # f.write(f"{code}")
+
+        with open("error.py", "w") as second_file:
+            for line in first_file:
+                output.write(line)
+"""
+
+def write_python_on_file(code):
+    with open("discord_message.py", "w") as first_file:
+        first_file.writelines(["import sys\n", "import traceback\n", f"try:\t{str(code)}"])
+
+        with open("error.py", "a+") as second_file:
+            for line in second_file:
+                first_file.writelines(line)
+
 
 
 def run_discord_python_code():

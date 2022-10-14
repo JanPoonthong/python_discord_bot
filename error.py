@@ -1,8 +1,3 @@
-import sys
-import traceback
-
-try:
-    print("5" + 3)
 except BaseException as ex:
     # Get current system exception
     ex_type, ex_value, ex_traceback = sys.exc_info()

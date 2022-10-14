@@ -1,1 +1,4 @@
-print("5" + 1)
+import sys
+import traceback
+try:	
+print("hello")
