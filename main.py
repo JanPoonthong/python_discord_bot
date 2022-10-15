@@ -5,6 +5,8 @@ import logging.handlers
 
 from subprocess import Popen, PIPE
 from dotenv import load_dotenv
+from matplotlib.dates import SecondLocator
+from numpy import insert
 
 load_dotenv()
 
@@ -41,36 +43,33 @@ def remove_prefix(text):
 
 
 def remove_python_prefix(discord_code):
-    discord_code = discord_code.removeprefix("```python")
+    discord_code = discord_code.removeprefix("```python\n")
     discord_code = discord_code[:-3]
     return discord_code
 
 
-""""
 def write_python_on_file(code):
-    with open("discord_message.py", "w") as first_file:
-        first_file.writelines(["import sys\n", "import traceback\n", "try:\n", f"\t{code}"])
-        # f.write(f"{code}")
+    insert_code = ""
+    for line_code in code.split("\n"):
+        insert_code += f"\t{line_code}\n"
+    insert_code = insert_code[:-1]
+    first_file = open("discord_message.py", "w")
+    first_file.writelines(
+        ["import sys\n", "import traceback\n", f"try:\n{insert_code}"]
+    )
+    second_file = open("error.py", "r")
+    for line in second_file:
+        first_file.write("\n")
+        first_file.write(line)
 
-        with open("error.py", "w") as second_file:
-            for line in first_file:
-                output.write(line)
-"""
-
-def write_python_on_file(code):
-    with open("discord_message.py", "w") as first_file:
-        first_file.writelines(["import sys\n", "import traceback\n", f"try:\t{str(code)}"])
-
-        with open("error.py", "a+") as second_file:
-            for line in second_file:
-                first_file.writelines(line)
-
+    first_file.close()
+    second_file.close()
 
 
 def run_discord_python_code():
     process = Popen(["python", "discord_message.py"], stdout=PIPE)
     (output, err) = process.communicate()
-    exit_code = process.wait()
+    process.wait()
     return output, err
 
 
