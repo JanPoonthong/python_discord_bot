@@ -1,12 +1,9 @@
-import discord
-import logging
-import os
 import logging.handlers
-
+import os
 from subprocess import Popen, PIPE
+
+import discord
 from dotenv import load_dotenv
-from matplotlib.dates import SecondLocator
-from numpy import insert
 
 load_dotenv()
 
@@ -89,7 +86,7 @@ async def on_message(message):
         )
 
     elif message.content.startswith("```python") and message.content.endswith(
-        "```"
+            "```"
     ):
         discord_code = remove_python_prefix(message.content)
         write_python_on_file(discord_code)
