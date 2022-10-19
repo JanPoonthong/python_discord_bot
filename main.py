@@ -80,12 +80,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith("$hello"):
-        await message.channel.send(
-            f"Hello! @{remove_prefix(str(message.author))}"
-        )
-
-    elif message.content.startswith("```python") and message.content.endswith(
+    if message.content.startswith("```python") and message.content.endswith(
             "```"
     ):
         discord_code = remove_python_prefix(message.content)
