@@ -54,7 +54,7 @@ def write_python_on_file(code):
     first_file.writelines(
         ["import sys\n", "import traceback\n", f"try:\n{insert_code}"]
     )
-    second_file = open("error.py", "r")
+    second_file = open("error.txt", "r")
     for line in second_file:
         first_file.write("\n")
         first_file.write(line)
