@@ -80,9 +80,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith("```python") and message.content.endswith(
-            "```"
-    ):
+    if message.content.startswith("```python") and message.content.endswith("```"):
         discord_code = remove_python_prefix(message.content)
         write_python_on_file(discord_code)
         output, err = run_discord_python_code()
